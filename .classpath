@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/ebx.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/ebx-addons.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/jms-2.0.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/tibjms.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/ecj-4.20.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/apache-logging-log4j.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/base64-2.3.7.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/CommonUtilities.jar"/>
+	<classpathentry kind="output" path="WEB-INF/classes"/>
+</classpath>

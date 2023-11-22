@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+    <permissions>
+        <tablePath>/root/Locomotive</tablePath>
+        <script>if isMember('Zone_CR') then 
+begin 
+    if not record.Loco_Owning_Zone.Zone_Code = 'CR' then
+        return readOnly;
+    return readWrite;
+end
+else if isMember('Zone_ER') then 
+begin 
+    if not record.Loco_Owning_Zone.Zone_Code = 'ER' then
+        return readOnly; 
+    return readWrite;
+end
+else if isMember('Zone_NR') then 
+begin 
+    if not record.Loco_Owning_Zone.Zone_Code = 'NR' then
+        return readOnly; 
+    return readWrite;
+end
+else if isMember('Zone_SR') then 
+begin 
+    if not record.Loco_Owning_Zone.Zone_Code = 'SR' then
+        return readOnly; 
+    return readWrite;
+end
+else if isMember('Zone_WR') then 
+begin 
+    if not record.Loco_Owning_Zone.Zone_Code = 'WR' then
+        return readOnly; 
+    return readWrite;
+end
+
+else if isMember('Division_ADI') then 
+begin 
+    if not record.Loco_Owning_Division.Division_Code  = 'ADI' then
+        return readOnly; 
+    return readWrite;
+end
+
+else if isMember('Division_ASN') then 
+begin 
+    if not record.Loco_Owning_Division.Division_Code  = 'ASN' then
+        return readOnly; 
+    return readWrite;
+end
+
+else if isMember('Division_BSL') then 
+begin 
+    if not record.Loco_Owning_Division.Division_Code  = 'BSL' then
+        return readOnly; 
+    return readWrite;
+end
+
+else if isMember('Division_DLI') then 
+begin 
+    if not record.Loco_Owning_Division.Division_Code  = 'DLI' then
+        return readOnly; 
+    return readWrite;
+end
+
+else if isMember('Division_NGP') then 
+begin 
+    if not record.Loco_Owning_Division.Division_Code  = 'NGP' then
+        return readOnly; 
+    return readWrite;
+end
+
+else if session.userId = 'admin' then
+    return readWrite; 
+
+else 
+begin 
+    return hidden; 
+end</script>
+        <activated>false</activated>
+    </permissions>
+</root>

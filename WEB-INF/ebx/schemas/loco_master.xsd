@@ -1,0 +1,1941 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--XML schema generated from EBX(R) DMA instance [reference=loco_master] on Fri Nov 03 08:41:42 IST 2023 by user [admin].-->
+<xs:schema xmlns:osd="urn:ebx-schemas:common_1.0" xmlns:fmt="urn:ebx-schemas:format_1.0" xmlns:ebxbnd="urn:ebx-schemas:binding_1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ebxs="urn:ebx-schemas:session_1.0">
+    <xs:import namespace="urn:ebx-schemas:common_1.0" schemaLocation="https://schema.orchestranetworks.com/common_1.0.xsd"/>
+    <xs:import namespace="urn:ebx-schemas:session_1.0" schemaLocation="https://schema.orchestranetworks.com/session_1.0.xsd"/>
+    <xs:include schemaLocation="urn:ebx:module:ebx-addon-dama:/WEB-INF/ebx/schema/media-type.xsd"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <osd:extensions class="com.cris.loco_master.extensions.LocoExtensions"/>
+            <osd:validation>
+                <validationMessageThreshold>1000</validationMessageThreshold>
+            </osd:validation>
+            <osd:inheritance>
+                <dataSetInheritance>none</dataSetInheritance>
+            </osd:inheritance>
+            <ebxbnd:binding targetDirectory="D:\EBX\ebxServer\webapps\loco_master\src\main\java">
+                <javaPathConstants typeName="com.cris.loco_master.Paths">
+                    <nodes root="/root" relativeToRoot="false"/>
+                </javaPathConstants>
+            </ebxbnd:binding>
+            <osd:replication>
+                <name>Locomotive_Replication</name>
+                <dataSpace>loco_data</dataSpace>
+                <dataSet>loco_data</dataSet>
+                <refresh>onCommit</refresh>
+                <table>
+                    <path>/root/Locomotive</path>
+                    <nameInDatabase>T_Loco</nameInDatabase>
+                </table>
+            </osd:replication>
+        </xs:appinfo>
+    </xs:annotation>
+    <xs:element name="root" osd:access="--">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Locomotive" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en-US">
+                            <osd:label>Locomotive</osd:label>
+                        </xs:documentation>
+                        <xs:appinfo>
+                            <osd:table>
+                                <primaryKeys>/Loco_Number </primaryKeys>
+                                <historyProfile>ebx-allBranches</historyProfile>
+                                <recordForm osd:class="com.cris.loco_master.form.LocomotiveForm"/>
+                                <defaultView>
+                                    <toolbars>
+                                        <tabularViewTop>Locomotives</tabularViewTop>
+                                    </toolbars>
+                                </defaultView>
+                            </osd:table>
+                            <osd:trigger class="com.cris.loco_master.trigger.NewContextTrigger"/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Loco_Number" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Number</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="5"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Type</osd:label>
+                                        <osd:description>Define loco type. Can extract Gauge/ Type of traction/ type of service. we will have reference master for this.</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Commissioning_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Commissioning Date</osd:label>
+                                        <osd:description>Date of commissioning is important to verify loco life and to observe its accessories functionality.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraint class="com.cris.commonjars.constraint.FutureDateRestrictionConstraint"/>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Manufacturer" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Manufacturer</osd:label>
+                                        <osd:description>Production unit manufactured the loco (CLW/ DLW etc)</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Manufacturer</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Control_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Control Type</osd:label>
+                                        <osd:description>Control Type in loco (RELAY,MPCS etc)</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Control_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Permanent_Domain" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Permanent Domain</osd:label>
+                                        <osd:description>Loco Domain (Passenger, Goods). For trafiic service it is important&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Permanent_Domain</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Service_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Service Type</osd:label>
+                                        <osd:description>loco used for which service&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Service_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Traction_Motor_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Traction Motor Type</osd:label>
+                                        <osd:description>Traction Motor Type (Hitachi, BHEL etc)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Traction_Motor_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Owning_Zone" minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Owning Zone</osd:label>
+                                        <osd:description>A loco belongs to which IR Zone</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.loco_master.enumeration.UserBasedZoneDivisionShedConstraintEnumeration">
+                                                <attributeName>Zone</attributeName>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Owning_Division" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Owning Division</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.loco_master.enumeration.UserBasedZoneDivisionShedConstraintEnumeration">
+                                                <attributeName>Division</attributeName>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Owning_Shed" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Owning Shed</osd:label>
+                                        <osd:description>A loco belongs which IR HOME Shed</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.loco_master.enumeration.UserBasedZoneDivisionShedConstraintEnumeration">
+                                                <attributeName>Shed</attributeName>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Boogie_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Boogie Type</osd:label>
+                                        <osd:description>Boogie Type (CO-CO, BO-BO etc.)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Boogie_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Brake_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Brake Type</osd:label>
+                                        <osd:description>Brake Type (AIR BRAKE, DUAL BRAKE)</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Brake_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Rtis_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Rtis Flag</osd:label>
+                                        <osd:description>Can Store RTIS flag, to find loco physical location (eg. in case of mishappening)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Rtis_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Remmlot_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Remmlot Flag</osd:label>
+                                        <osd:description>Whether REMMLOT devices are there in loco or not? For diesel locos only&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Remmlot_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Lease_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Lease Type</osd:label>
+                                        <osd:description>Is loco on Lease(Type of Lease - Permanent/Contract)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Lease_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="15"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Manufacturing_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Manufacturing Date</osd:label>
+                                        <osd:description>Date on which loco is manufactured. it is required to claim warranty obligations&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraint class="com.cris.commonjars.constraint.FutureDateRestrictionConstraint"/>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Receiving_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Receiving Date</osd:label>
+                                        <osd:description>When loco received (date of receiving)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraint class="com.cris.commonjars.constraint.FutureDateRestrictionConstraint"/>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Entry_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Entry Date</osd:label>
+                                        <osd:description>It is a sysytem date when loco data added in Data Base&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Status" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Status</osd:label>
+                                        <osd:description>Status of loco like Normal/ failed/ Dead/ under repair/ idle etc. basically it is transactional data.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Status</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="50"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Hotel_Load" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Hotel Load</osd:label>
+                                        <osd:description>Hotel Load is used to supply power to ac coaches in rajdhani/shatabdi/Mail and Express trains etc. It is important bcoz on the basis (availability) of that loco use for improtant trains like Rajdhani/ shatabdi etc.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Hotel_Load</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Cab1_AC" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Cab1 AC</osd:label>
+                                        <osd:description>Is loco has ac cab or not for loco driver&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Cab1_AC</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Cab2_AC" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Cab2 AC</osd:label>
+                                        <osd:description>Is loco has ac cab or not for loco driver&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Cab2_AC</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Auxilary" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Auxilary</osd:label>
+                                        <osd:description>Auxilliary out put is required to drive three phase motors etc provided in the locos.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Auxilary</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Brake_Sub_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Brake Sub Type</osd:label>
+                                        <osd:description>Brake Sub type denotes which type of break system is provided in the loco&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Brake_Sub_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="25"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Gauge_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Gauge Type</osd:label>
+                                        <osd:description>It is important to define type of rail gauge on which locos is suitable for running like broad gauge , narrow gauge etc&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Gauge_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Axle_Load" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Axle Load</osd:label>
+                                        <osd:description>Axle Load value Should not be  less then as per the formula (Axle Load=Total Weight of Loco/Number of Axle)</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:tableRef>
+                                                <tablePath>/root/Loco_Type</tablePath>
+                                                <display>
+                                                    <pattern>${./Loco_Axle_Load}</pattern>
+                                                </display>
+                                                <filter>
+                                                    <predicate>./Loco_Type = ${../Loco_Type}</predicate>
+                                                </filter>
+                                            </osd:tableRef>
+                                        </osd:otherFacets>
+                                        <osd:information>Axle Load value Should not be  less then as per the formula (Axle Load=Total Weight of Loco/Number of Axle)</osd:information>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Hauling_Power" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Hauling Power</osd:label>
+                                        <osd:description>It is the power how much load can a loco drag.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:int">
+                                        <xs:totalDigits value="5"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Traction_Code" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Traction Code</osd:label>
+                                        <osd:description>It defines either loco is electrical or diesel.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Traction_Code</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Condemn_Proposal_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Condemn Proposal Type</osd:label>
+                                        <osd:description>whether loco condemnation is premature or postmature.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Condemn_Proposal_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="15"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Condemn_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Condemn Date</osd:label>
+                                        <osd:description>Condemnation is an importat event in life cycle of a Loco and must be captured .&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_POH_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco POH Date</osd:label>
+                                        <osd:description>POH date of Loco&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_HRP_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco HRP Flag</osd:label>
+                                        <osd:description>It collects the power from over head equipment where the height of over head equipment is more for double stack containers&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_HRP_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Hog_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Hog Flag</osd:label>
+                                        <osd:description>Head on generation..may be required while planning or nomination of loco for Passenger or Goods trains.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Hog_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Kavach_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Kavach Flag</osd:label>
+                                        <osd:description>Loco Fitted with Anti Collision Device&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Kavach_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Power_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Power Type</osd:label>
+                                        <osd:description>Type of loco power - Dropdown having only two value  DPCS/ DPWCS.&#xd;
+* DPCS: Distributed Power Control System&#xd;
+* DPWCS: Distributed Power Wireless Control System. &#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Power_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="5"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_CVVRS_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco CVVRS Type</osd:label>
+                                        <osd:description>Crew Voice and Video Recording System. It captures all the activities performed by the Loco Pilot.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_CVVRS_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_VCD_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco VCD Flag</osd:label>
+                                        <osd:description>Vigilance control device&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_VCD_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Pvt_Owner_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Pvt Owner Flag</osd:label>
+                                        <osd:description>values:'Y' if Private Loco and for other it will be N.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Pvt_Owner_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Pvt_Party_Code" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Pvt Party Code</osd:label>
+                                        <osd:description>private party code.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Pvt_Party_Code</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Allotment_Letter">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Allotment Letter</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Allotment_Letter_Number" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Allotment Letter Number</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="40"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Allotment_Letter_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Allotment Letter Date</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="Allotment_Letter" type="mediaType" minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Allotment Letter Document</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Reference_Documents" minOccurs="0" maxOccurs="unbounded" osd:class="com.cris.loco_master.service.workflow.transfer.ReferenceDocBeanClass">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Reference Documents</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:defaultView>
+                                            <displayMode>expanded</displayMode>
+                                        </osd:defaultView>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Reference_Document_Number" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Reference Document Number</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="40"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Reference_Document_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Reference Document Date</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="Reference_Document" type="mediaType" minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Reference Document</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Audit_Info">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Audit Info</osd:label>
+                                        <osd:description>Audit Info</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Source_Record_Id" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Source Record Id</osd:label>
+                                                    <osd:description>Source Record Id</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="40"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Source_System_Name" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Source System Name</osd:label>
+                                                    <osd:description>Source System Name</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="40"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Source_Event_Type" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Source Event Type</osd:label>
+                                                    <osd:description>Source Event Type</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="40"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Created_By_User" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Created By User</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="50"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="Logged_In_User" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Logged in User</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="50"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Loco_Type" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <osd:table>
+                                <primaryKeys>/MDM_Loco_Type_ID </primaryKeys>
+                                <defaultLabel>${./Loco_Type}</defaultLabel>
+                            </osd:table>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="MDM_Loco_Type_ID" type="xs:int" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>MDM Loco Type ID</osd:label>
+                                        <osd:description>MDM Loco Type ID</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:autoIncrement/>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Type</osd:label>
+                                        <osd:description>Loco Type</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Traction" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Traction</osd:label>
+                                        <osd:description>Loco Traction</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Description" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Description</osd:label>
+                                        <osd:description>Loco Description</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="50"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Length" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Length</osd:label>
+                                        <osd:description>Loco Length</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Hauling_Power" type="xs:int" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Hauling Power</osd:label>
+                                        <osd:description>Loco Hauling Power</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Axle_Load" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Axle Load</osd:label>
+                                        <osd:description>Loco Axle Load</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                        <xs:pattern value="[0-9]*\.?[0-9]*"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Axle_Unit" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Axle Unit</osd:label>
+                                        <osd:description>Loco Axle Unit</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Gauge_Code" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Gauge Code</osd:label>
+                                        <osd:description>Loco Gauge Code</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Loco_Sources" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <osd:table>
+                                <primaryKeys>/MDM_Id </primaryKeys>
+                            </osd:table>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="MDM_Id" type="xs:int" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:appinfo>
+                                        <osd:autoIncrement/>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Number" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Number</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:tableRef>
+                                                <tablePath>/root/Locomotive</tablePath>
+                                            </osd:tableRef>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Source" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Source</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Type</osd:label>
+                                        <osd:description>Define loco type. Can extract Gauge/ Type of traction/ type of service. we will have reference master for this.</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:tableRef>
+                                                <tablePath>/root/Loco_Type</tablePath>
+                                            </osd:tableRef>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Commissioning_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Commissioning Date</osd:label>
+                                        <osd:description>Date of commissioning is important to verify loco life and to observe its accessories functionality.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Manufacturer" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Manufacturer</osd:label>
+                                        <osd:description>Production unit manufactured the loco (CLW/ DLW etc)</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Manufacturer</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Control_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Control Type</osd:label>
+                                        <osd:description>Control Type in loco (RELAY,MPCS etc)</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Control_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Permanent_Domain" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Permanent Domain</osd:label>
+                                        <osd:description>Loco Domain (Passenger, Goods). For trafiic service it is important&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Permanent_Domain</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Service_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Service Type</osd:label>
+                                        <osd:description>loco used for which service&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Service_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Traction_Motor_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Traction Motor Type</osd:label>
+                                        <osd:description>Traction Motor Type (Hitachi, BHEL etc)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Traction_Motor_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Owning_Zone" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Owning Zone</osd:label>
+                                        <osd:description>A loco belongs to which IR Zone</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:tableRef>
+                                                <container>reference_data</container>
+                                                <branch>reference_data</branch>
+                                                <tablePath>/root/Zone</tablePath>
+                                            </osd:tableRef>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Owning_Division" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Owning Division</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:tableRef>
+                                                <container>reference_data</container>
+                                                <branch>reference_data</branch>
+                                                <tablePath>/root/Division</tablePath>
+                                                <filter>
+                                                    <predicate>./Zone_Code = ${../Loco_Owning_Zone}</predicate>
+                                                </filter>
+                                            </osd:tableRef>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Owning_Shed" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Owning Shed</osd:label>
+                                        <osd:description>A loco belongs which IR HOME Shed</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:tableRef>
+                                                <container>reference_data</container>
+                                                <branch>reference_data</branch>
+                                                <tablePath>/root/Shed</tablePath>
+                                                <filter>
+                                                    <predicate>(./Zone_Code = ${../Loco_Owning_Zone} ) and (./Division_Code = ${../Loco_Owning_Division})</predicate>
+                                                </filter>
+                                            </osd:tableRef>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Boogie_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Boogie Type</osd:label>
+                                        <osd:description>Boogie Type (CO-CO, BO-BO etc.)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Boogie_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Brake_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Brake Type</osd:label>
+                                        <osd:description>Brake Type (AIR BRAKE, DUAL BRAKE)</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Brake_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Rtis_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Rtis Flag</osd:label>
+                                        <osd:description>Can Store RTIS flag, to find loco physical location (eg. in case of mishappening)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Rtis_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Remmlot_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Remmlot Flag</osd:label>
+                                        <osd:description>Whether REMMLOT devices are there in loco or not? For diesel locos only&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Remmlot_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Lease_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Lease Type</osd:label>
+                                        <osd:description>Is loco on Lease(Type of Lease - Permanent/Contract)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Lease_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="15"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Manufacturing_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Manufacturing Date</osd:label>
+                                        <osd:description>Date on which loco is manufactured. it is required to claim warranty obligations&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Receiving_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Receiving Date</osd:label>
+                                        <osd:description>When loco received (date of receiving)&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Entry_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Entry Date</osd:label>
+                                        <osd:description>It is a sysytem date when loco data added in Data Base&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Status" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Status</osd:label>
+                                        <osd:description>Status of loco like Normal/ failed/ Dead/ under repair/ idle etc. basically it is transactional data.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Status</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Hotel_Load" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Hotel Load</osd:label>
+                                        <osd:description>Hotel Load is used to supply power to ac coaches in rajdhani/shatabdi/Mail and Express trains etc. It is important bcoz on the basis (availability) of that loco use for improtant trains like Rajdhani/ shatabdi etc.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Hotel_Load</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Cab1_AC" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Cab1 AC</osd:label>
+                                        <osd:description>Is loco has ac cab or not for loco driver&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Cab1_AC</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Cab2_AC" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Cab2 AC</osd:label>
+                                        <osd:description>Is loco has ac cab or not for loco driver&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Cab2_AC</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Auxilary" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Auxilary</osd:label>
+                                        <osd:description>Auxilliary out put is required to drive three phase motors etc provided in the locos.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Auxilary</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Brake_Sub_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Brake Sub Type</osd:label>
+                                        <osd:description>Brake Sub type denotes which type of break system is provided in the loco&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Brake_Sub_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="20"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Gauge_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Gauge Type</osd:label>
+                                        <osd:description>It is important to define type of rail gauge on which locos is suitable for running like broad gauge , narrow gauge etc&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Gauge_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Axle_Load" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Axle Load</osd:label>
+                                        <osd:description>It is the load which can bear an axle of loco. The axle load is total weight of loco divided by the no. of axles&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Axle_Load</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Hauling_Power" type="xs:int" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Hauling Power</osd:label>
+                                        <osd:description>It is the power how much load can a loco drag.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Traction_Code" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Traction Code</osd:label>
+                                        <osd:description>It defines either loco is electrical or diesel.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Traction_Code</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Condemn_Proposal_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Condemn Proposal Type</osd:label>
+                                        <osd:description>whether loco condemnation is premature or postmature.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Condemn_Proposal_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="15"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Condemn_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Condemn Date</osd:label>
+                                        <osd:description>Condemnation is an importat event in life cycle of a Loco and must be captured .&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_POH_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco POH Date</osd:label>
+                                        <osd:description>POH date of Loco&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_HRP_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco HRP Flag</osd:label>
+                                        <osd:description>It collects the power from over head equipment where the height of over head equipment is more for double stack containers&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_HRP_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Hog_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Hog Flag</osd:label>
+                                        <osd:description>Head on generation..may be required while planning or nomination of loco for Passenger or Goods trains.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Hog_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Kavach_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Kavach Flag</osd:label>
+                                        <osd:description>Loco Fitted with Anti Collision Device&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Kavach_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Power_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Power Type</osd:label>
+                                        <osd:description>Type of loco power - Dropdown having only two value  DPCS/ DPWCS.&#xd;
+* DPCS: Distributed Power Control System&#xd;
+* DPWCS: Distributed Power Wireless Control System. &#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Power_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="5"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_CVVRS_Type" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco CVVRS Type</osd:label>
+                                        <osd:description>Crew Voice and Video Recording System. It captures all the activities performed by the Loco Pilot.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_CVVRS_Type</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_VCD_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco VCD Flag</osd:label>
+                                        <osd:description>Vigilance control device&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_VCD_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Pvt_Owner_Flag" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Pvt Owner Flag</osd:label>
+                                        <osd:description>values:'Y' if Private Loco and for other it will be N.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Pvt_Owner_Flag</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Pvt_Party_Code" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Pvt Party Code</osd:label>
+                                        <osd:description>private party code.&#xd;
+</osd:description>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
+                                                <refCode>Loco_Pvt_Party_Code</refCode>
+                                            </osd:constraintEnumeration>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Loco_Sources_Second" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en-US">
+                            <osd:label>Loco_Sources_II</osd:label>
+                        </xs:documentation>
+                        <xs:appinfo>
+                            <osd:table>
+                                <primaryKeys>/MDM_ID </primaryKeys>
+                            </osd:table>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="MDM_ID" type="xs:int" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:appinfo>
+                                        <osd:autoIncrement/>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Loco_Number" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:tableRef>
+                                                <tablePath>/root/Locomotive</tablePath>
+                                            </osd:tableRef>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Overall_DQ_Score" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="Loco_Sources" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="Loco_Type" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="DQ_Score" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
