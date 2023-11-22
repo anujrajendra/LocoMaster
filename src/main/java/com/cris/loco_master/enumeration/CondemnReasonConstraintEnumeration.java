@@ -49,15 +49,15 @@ public class CondemnReasonConstraintEnumeration implements ConstraintEnumeration
 				list.add("Accidental Loco");
 				list.add("Non Economical Repair Locos observed during schedule inspection/ POH shops");
 			} else {
-				if (locoType.equalsIgnoreCase("Diesel")) {
-					list.add("Completed codal life 36 Years (for Diesel Locos)");
-					list.add("Completed codal life of 30 Years (for diesel Locos)");
-					list.add("Surplus ALCO make diesel Locos Completed Above 15 years of age");
-					list.add("IRFC funded locos with Lease fore clousre after approval Of RB");
-				} else {
-					list.add("Completed codal Life of 35 Years (For Electrical Locos)");
-					list.add("IRFC funded locos with Lease fore clousre after approval Of RB");
-				}
+				// if (locoType.equalsIgnoreCase("Diesel")) {
+				list.add("Completed codal life 36 Years (for Diesel Locos)");
+				list.add("Completed codal life of 30 Years (for diesel Locos)");
+				list.add("Surplus ALCO make diesel Locos Completed Above 15 years of age");
+				list.add("IRFC funded locos with Lease fore clousre after approval Of RB");
+				// } else {
+				list.add("Completed codal Life of 35 Years (For Electrical Locos)");
+				list.add("IRFC funded locos with Lease fore clousre after approval Of RB");
+				// }
 			}
 		}
 		return list;

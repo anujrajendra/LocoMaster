@@ -73,9 +73,37 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 		if (!(eventOutcome instanceof DisplayStep.EventOutcome)) {
 			return eventOutcome;
 		}
+		final ValueContextForValidation valueConext = context.getValueContext(TransferServicePaths._objectKey);
 
+		Request request = context.getEntitySelection().getSelectedRecords();
+		RequestResult result = request.execute();
+		Adaptation record = result.nextAdaptation();
+
+		String locoNumber = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Number);
+		String locoType = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Type);
+		String locoTraction = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Traction_Motor_Type);
+		String oldZone = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Zone);
+		String oldDivision = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Division);
+		String oldShed = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Shed);
+
+//		List<String> recordList = new ArrayList<String>();
+//		for (Adaptation record1; (record1 = result.nextAdaptation()) != null;) {
+//			recordList.add((String) record1.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Number));
+//		}
 		switch ((DisplayStep.EventOutcome) eventOutcome) {
 
+		case DISPLAY_INPUT_SCREEN:
+			this.currentStep = new DisplayInputScreen();
+			return null;
+		case DISPLAY_CONFIRMATION:
+
+			this.currentStep = new DisplayConfirmationStep("Loco Number - " + locoNumber + "<BR>" + "<BR> To"
+					+ "<BR>Loco Zone - " + valueConext.getValue(TransferServicePaths._zone) + "<BR> Loco Division - "
+					+ valueConext.getValue(TransferServicePaths._division) + "<BR> Loco Shed - "
+					+ valueConext.getValue(TransferServicePaths._shed) + "<BR> Loco Shed - "
+					+ valueConext.getValue(TransferServicePaths._shed) + "<BR> Loco Transfer Date - "
+					+ valueConext.getValue(TransferServicePaths._transfer_date));
+			return null;
 		case DISPLAY_RESULT:
 			// final ProcedureResult result = updateRecords(context);
 			try {
@@ -84,7 +112,8 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			this.currentStep = new DisplayResultStep(" of locomotives has been submitted successfully.");
+			this.currentStep = new DisplayResultStep(
+					" " + locoNumber + " of locomotives has been submitted successfully.");
 			return null;
 
 		default:
@@ -112,7 +141,12 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 		RequestResult result = request.execute();
 		Adaptation record = result.nextAdaptation();
 
-		String locoShed = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Shed);
+		String locoNumber = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Number);
+		String locoType = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Type);
+		String locoTraction = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Traction_Motor_Type);
+		String oldZone = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Zone);
+		String oldDivision = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Division);
+		String oldShed = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Shed);
 
 		WorkflowEngine wfEngine = WorkflowEngine.getFromRepository(repository, context.getSession());
 		List<String> recordList = new ArrayList<String>();
@@ -160,9 +194,39 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 
 		final BeanDefinition beanDefinition = builder.createBeanDefinition();
 
+		final BeanElement locoNumberBeanElement = beanDefinition.createElement(TransferServicePaths._loco_number,
+				SchemaTypeName.XS_STRING);
+		locoNumberBeanElement.setLabel("Loco Number");
+		locoNumberBeanElement.setDefaultValue(locoNumber);
+
+		final BeanElement locoTypeBeanElement = beanDefinition.createElement(TransferServicePaths._loco_type,
+				SchemaTypeName.XS_STRING);
+		locoTypeBeanElement.setLabel("Loco Type");
+		locoTypeBeanElement.setDefaultValue(locoType);
+
+		final BeanElement locoTractionBeanElement = beanDefinition.createElement(TransferServicePaths._loco_traction,
+				SchemaTypeName.XS_STRING);
+		locoTractionBeanElement.setLabel("Loco Traction");
+		locoTractionBeanElement.setDefaultValue(locoTraction);
+
+		final BeanElement oldZoneBeanElement = beanDefinition.createElement(TransferServicePaths._old_zone,
+				SchemaTypeName.XS_STRING);
+		oldZoneBeanElement.setLabel("Old Zone");
+		oldZoneBeanElement.setDefaultValue(oldZone);
+
+		final BeanElement oldDivisionBeanElement = beanDefinition.createElement(TransferServicePaths._old_division,
+				SchemaTypeName.XS_STRING);
+		oldDivisionBeanElement.setLabel("Old Division");
+		oldDivisionBeanElement.setDefaultValue(oldDivision);
+
+		final BeanElement oldShedBeanElement = beanDefinition.createElement(TransferServicePaths._old_shed,
+				SchemaTypeName.XS_STRING);
+		oldShedBeanElement.setLabel("Old Shed");
+		oldShedBeanElement.setDefaultValue(oldShed);
+
 		final BeanElement zoneBeanElement = beanDefinition.createElement(TransferServicePaths._zone,
 				SchemaTypeName.XS_STRING);
-		zoneBeanElement.setLabel("Zone");
+		zoneBeanElement.setLabel("New Zone");
 		zoneBeanElement.setDescription("List of Zones");
 		zoneBeanElement.setMinOccurs(1);
 		zoneBeanElement.setMaxOccurs(1);
@@ -170,7 +234,7 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 
 		final BeanElement divisionBeanElement = beanDefinition.createElement(TransferServicePaths._division,
 				SchemaTypeName.XS_STRING);
-		divisionBeanElement.setLabel("Division");
+		divisionBeanElement.setLabel("New Division");
 		divisionBeanElement.setDescription("List of Divisions");
 		divisionBeanElement.setMinOccurs(1);
 		divisionBeanElement.setMaxOccurs(1);
@@ -179,7 +243,7 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 
 		final BeanElement shedBeanElement = beanDefinition.createElement(TransferServicePaths._shed,
 				SchemaTypeName.XS_STRING);
-		shedBeanElement.setLabel("Shed");
+		shedBeanElement.setLabel("New Shed");
 		shedBeanElement.setDescription("List of Sheds");
 		shedBeanElement.setMinOccurs(1);
 		shedBeanElement.setMaxOccurs(1);
@@ -188,8 +252,8 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 
 		final BeanElement shedOfCurrentRecordBeanElement = beanDefinition
 				.createElement(TransferServicePaths._shed_of_record, SchemaTypeName.XS_STRING);
-		if (locoShed != null)
-			shedOfCurrentRecordBeanElement.setDefaultValue(locoShed);
+		if (oldShed != null)
+			shedOfCurrentRecordBeanElement.setDefaultValue(oldShed);
 		else
 			shedOfCurrentRecordBeanElement.setDefaultValue("");
 
@@ -202,17 +266,17 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 		final BeanElement docNumberBeanElement = beanDefinition
 				.createElement(TransferServicePaths._reference_document_number, SchemaTypeName.XS_STRING);
 		docNumberBeanElement.setMinOccurs(1);
-		docNumberBeanElement.setLabel("Doc Number");
+		docNumberBeanElement.setLabel("Letter Number");
 
 		final BeanElement docDateBeanElement = beanDefinition
 				.createElement(TransferServicePaths._reference_document_date, SchemaTypeName.XS_DATE);
 		docDateBeanElement.setMinOccurs(1);
-		docDateBeanElement.setLabel("Doc Date");
+		docDateBeanElement.setLabel("Letter Date");
 
 		final BeanElement docAttachementBeanElement = beanDefinition
 				.createElement(TransferServicePaths._reference_document_attachement, BeanDefinition.OSD_FILE_UPLOAD);
 		docAttachementBeanElement.setMinOccurs(1);
-		docAttachementBeanElement.setLabel("Doc Upload");
+		docAttachementBeanElement.setLabel("Letter Upload");
 
 		builder.registerBean(TransferServicePaths._objectKey, beanDefinition);
 	}
@@ -235,6 +299,7 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 		final String zone = (String) valueContext.getValue(TransferServicePaths._zone);
 		final String division = (String) valueContext.getValue(TransferServicePaths._division);
 		final String shed = (String) valueContext.getValue(TransferServicePaths._shed);
+		final Date transferDate = (Date) valueContext.getValue(TransferServicePaths._transfer_date);
 
 		final String docNumber = (String) valueContext.getValue(TransferServicePaths._reference_document_number);
 		final Date docDate = (Date) valueContext.getValue(TransferServicePaths._reference_document_date);
@@ -266,6 +331,7 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 		String assetId = newAsset.getAssetID();
 
 		WorkflowEngine wfEngine = WorkflowEngine.getFromRepository(repository, context.getSession());
+
 		ProcessLauncher launcher = null;
 
 		launcher = wfEngine.getProcessLauncher(PublishedProcessKey.forName("loco_transfer_ui"));
@@ -304,15 +370,15 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 
 					ValueContextForUpdate vcfuContextForUpdate = procedureContext
 							.getContext(locoRecord1.getAdaptationName());
-					vcfuContextForUpdate.setValueEnablingPrivilegeForNode("RS - Request sent for transfer",
+					vcfuContextForUpdate.setValueEnablingPrivilegeForNode("RS - Request sent for Transfer",
 							Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
 
 					procedureContext.doModifyContent(locoRecord1, vcfuContextForUpdate);
 				}
 			};
 
-			ProgrammaticService svc1 = ProgrammaticService.createForSession(context.getSession(), dataspace);
-			svc1.execute(procedure1);
+//			ProgrammaticService svc1 = ProgrammaticService.createForSession(context.getSession(), dataspace);
+//			svc1.execute(procedure1);
 
 			final Procedure procedure = new Procedure() {
 
@@ -340,9 +406,11 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 							Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Division);
 					vcfuRecord.setValueEnablingPrivilegeForNode(shed,
 							Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Shed);
+					vcfuRecord.setValueEnablingPrivilegeForNode(transferDate,
+							Paths._Root_Locomotive._Root_Locomotive_Loco_Transfer_Date);
 
-					vcfuRecord.setValueEnablingPrivilegeForNode("RS - Request sent for transfer",
-							Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
+//					vcfuRecord.setValueEnablingPrivilegeForNode("RS - Request sent for Transfer",
+//							Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
 
 					procedureContext.doModifyContent(locoRecord, vcfuRecord);
 				}
@@ -353,8 +421,8 @@ public class LocoTransferService implements UserService<TableViewEntitySelection
 
 			launcher.setInputParameter("childDataSpace", dataspaceCreation.getDataspaceName());
 			launcher.setInputParameter("record", xPathExpression);
-			launcher.setLabel(UserMessage.createInfo("Loco Transfer"));
-			launcher.setDescription(UserMessage.createInfo("Loco Transfer"));
+			launcher.setLabel(UserMessage.createInfo("Loco - " + locoNumber + " Transfer Request"));
+			launcher.setDescription(UserMessage.createInfo("Loco - " + locoNumber + " Transfer Request"));
 			launcher.launchProcess();
 
 		}

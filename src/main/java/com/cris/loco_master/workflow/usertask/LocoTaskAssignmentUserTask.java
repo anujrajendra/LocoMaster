@@ -21,13 +21,9 @@ import com.orchestranetworks.query.QueryResult;
 import com.orchestranetworks.query.Tuple;
 import com.orchestranetworks.schema.Path;
 import com.orchestranetworks.service.OperationException;
-import com.orchestranetworks.service.Procedure;
-import com.orchestranetworks.service.ProcedureContext;
 import com.orchestranetworks.service.Profile;
-import com.orchestranetworks.service.ProgrammaticService;
 import com.orchestranetworks.service.Role;
 import com.orchestranetworks.service.UserReference;
-import com.orchestranetworks.service.ValueContextForUpdate;
 import com.orchestranetworks.service.directory.DirectoryHandler;
 import com.orchestranetworks.workflow.CreationWorkItemSpec;
 import com.orchestranetworks.workflow.UserTask;
@@ -98,7 +94,7 @@ public class LocoTaskAssignmentUserTask extends UserTask {
 				adaptationRecord = adaptationTable
 						.lookupAdaptationByPrimaryKey(PrimaryKey.parseString(recordIdentifier));
 
-				System.out.println("===Loco number===" + locoNumber);
+				// System.out.println("===Loco number===" + locoNumber);
 				WorkflowEngine wfEngine = WorkflowEngine.getFromRepository(repo, context.getSession());
 
 				if (LocoRecordOperationRestrictionUtils.checkRunningProcesses(wfEngine, "loco_create_ui", "record",
@@ -114,71 +110,71 @@ public class LocoTaskAssignmentUserTask extends UserTask {
 				}
 
 			}
-
-		} else {
-
-			String tableString = record.substring(0, record.indexOf("["));
-			String recordIdentifier = record.substring(record.indexOf("=") + 2, record.indexOf("]") - 1);
-
-			adaptationTable = datasetName.getTable((Path.parse(tableString)));
-			adaptationRecord = adaptationTable.lookupAdaptationByPrimaryKey(PrimaryKey.parseString(recordIdentifier));
-
-			if (workflowName == null)
-				workflowName = "";
-
-			if (workflowName.equalsIgnoreCase("condemn")) {
-				Procedure procedure = new Procedure() {
-					@Override
-					public void execute(ProcedureContext pContext) throws Exception {
-						// TODO Auto-generated method stub
-
-						ValueContextForUpdate vcfu = pContext.getContext(adaptationRecord.getAdaptationName());
-
-						if (context.isAcceptAction()) {
-							vcfu.setValueEnablingPrivilegeForNode("Condemned",
-									Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
-
-							pContext.doModifyContent(adaptationRecord, vcfu);
-						} else {
-							vcfu.setValueEnablingPrivilegeForNode("",
-									Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
-
-							pContext.doModifyContent(adaptationRecord, vcfu);
-						}
-					}
-				};
-
-				ProgrammaticService svc = ProgrammaticService.createForSession(context.getSession(), dataspaceName);
-				svc.execute(procedure);
-			} else if (workflowName.equalsIgnoreCase("transfer")) {
-				Procedure procedure = new Procedure() {
-					@Override
-					public void execute(ProcedureContext pContext) throws Exception {
-						// TODO Auto-generated method stub
-
-						ValueContextForUpdate vcfu = pContext.getContext(adaptationRecord.getAdaptationName());
-
-						if (context.isAcceptAction()) {
-
-							vcfu.setPrivilegeForNode(Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
-							vcfu.setValueEnablingPrivilegeForNode(" ",
-									Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
-
-							pContext.doModifyContent(adaptationRecord, vcfu);
-						} else {
-							vcfu.setValueEnablingPrivilegeForNode(" ",
-									Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
-
-							pContext.doModifyContent(adaptationRecord, vcfu);
-
-						}
-					}
-				};
-
-				ProgrammaticService svc = ProgrammaticService.createForSession(context.getSession(), dataspaceName);
-				svc.execute(procedure);
-			}
 		}
+//		} else {
+//
+//			String tableString = record.substring(0, record.indexOf("["));
+//			String recordIdentifier = record.substring(record.indexOf("=") + 2, record.indexOf("]") - 1);
+//
+//			adaptationTable = datasetName.getTable((Path.parse(tableString)));
+//			adaptationRecord = adaptationTable.lookupAdaptationByPrimaryKey(PrimaryKey.parseString(recordIdentifier));
+//
+//			if (workflowName == null)
+//				workflowName = "";
+//
+//			if (workflowName.equalsIgnoreCase("condemn")) {
+//				Procedure procedure = new Procedure() {
+//					@Override
+//					public void execute(ProcedureContext pContext) throws Exception {
+//						// TODO Auto-generated method stub
+//
+//						ValueContextForUpdate vcfu = pContext.getContext(adaptationRecord.getAdaptationName());
+//
+//						if (context.isAcceptAction()) {
+//							vcfu.setValueEnablingPrivilegeForNode("Condemned",
+//									Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
+//
+//							pContext.doModifyContent(adaptationRecord, vcfu);
+//						} else {
+//							vcfu.setValueEnablingPrivilegeForNode("",
+//									Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
+//
+//							pContext.doModifyContent(adaptationRecord, vcfu);
+//						}
+//					}
+//				};
+//
+//				ProgrammaticService svc = ProgrammaticService.createForSession(context.getSession(), dataspaceName);
+//				svc.execute(procedure);
+//			} else if (workflowName.equalsIgnoreCase("transfer")) {
+//				Procedure procedure = new Procedure() {
+//					@Override
+//					public void execute(ProcedureContext pContext) throws Exception {
+//						// TODO Auto-generated method stub
+//
+//						ValueContextForUpdate vcfu = pContext.getContext(adaptationRecord.getAdaptationName());
+//
+//						if (context.isAcceptAction()) {
+//
+//							vcfu.setPrivilegeForNode(Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
+//							vcfu.setValueEnablingPrivilegeForNode(" ",
+//									Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
+//
+//							pContext.doModifyContent(adaptationRecord, vcfu);
+//						} else {
+//							vcfu.setValueEnablingPrivilegeForNode(" ",
+//									Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
+//
+//							pContext.doModifyContent(adaptationRecord, vcfu);
+//
+//						}
+//					}
+//				};
+//
+//				ProgrammaticService svc = ProgrammaticService.createForSession(context.getSession(), dataspaceName);
+//				svc.execute(procedure);
+//			}
+//		}
 	}
 
 	@Override
@@ -263,6 +259,7 @@ public class LocoTaskAssignmentUserTask extends UserTask {
 			if (!profiles.isEmpty()) {
 				context.createWorkItem(CreationWorkItemSpec.forOfferring(profiles));
 			} else {
+				// context.createWorkItem(CreationWorkItemSpec.forOffer(Role.ADMINISTRATOR));
 				context.createWorkItem(CreationWorkItemSpec.forOfferring(UserReference.forUser("admin")));
 			}
 

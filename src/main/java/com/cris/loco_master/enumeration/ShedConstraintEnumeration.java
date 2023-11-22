@@ -53,7 +53,7 @@ public class ShedConstraintEnumeration implements ConstraintEnumeration<String> 
 		// TODO Auto-generated method stub
 		String zoneValue = (String) context.getValue(Path.parse("../Zone"));
 		String divisionValue = (String) context.getValue(Path.parse("../Division"));
-		String shedOfCurrentRecord = (String) context.getValue(Path.parse("../Shed_Of_Current_Record"));
+		String oldShed = (String) context.getValue(Path.parse("../Old_Shed"));
 
 		Repository repository = Repository.getDefault();
 		final HomeKey referenceDataSpaceKey = HomeKey.forBranchName("reference_data");
@@ -81,7 +81,7 @@ public class ShedConstraintEnumeration implements ConstraintEnumeration<String> 
 
 				if (zoneValue.equalsIgnoreCase(shedRecord.getString(Path.parse("./Zone_Code")))
 						&& divisionValue.equalsIgnoreCase(shedRecord.getString(Path.parse("./Division_Code")))
-						&& (!shedOfCurrentRecord.equalsIgnoreCase(shedCode))) {
+						&& (!oldShed.equalsIgnoreCase(shedCode))) {
 					shedName = shedName != null ? shedName : "";
 
 					list.add(shedCode);

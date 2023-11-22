@@ -27,15 +27,13 @@ public class LocomotiveAuditPane implements UIFormPane {
 		String userId = aContext.getSession().getUserReference().getUserId();
 		pWriter.addJS("var userId = '" + userId + "';\n");
 
-		pWriter.addJS_setNodeValue("userId",
+		pWriter.addJS_setNodeValue("userId", Paths._Root_Locomotive._Root_Locomotive_Audit_Info_Logged_In_User);
 
-				Paths._Root_Locomotive._Root_Locomotive_Audit_Info_Logged_In_User);
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Audit_Info_Logged_In_User);
 
 		pWriter.endTableFormRow();
 		pWriter.add("</td></tr></table>");
 		// pWriter.endBorder();
 		pWriter.add("</div>");
-
 	}
 }

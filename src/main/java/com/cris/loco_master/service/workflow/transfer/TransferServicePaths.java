@@ -9,6 +9,13 @@ public interface TransferServicePaths {
 	ObjectKey _objectKey = ObjectKey.forName("loco_transfer");
 
 	// Path for the Zone field.
+	Path _loco_number = Path.parse("Loco_Number");
+	Path _loco_type = Path.parse("Loco_Type");
+	Path _loco_traction = Path.parse("Loco_Traction");
+	Path _old_zone = Path.parse("Old_Zone");
+	Path _old_division = Path.parse("Old_Division");
+	Path _old_shed = Path.parse("Old_Shed");
+
 	Path _zone = Path.parse("Zone");
 	Path _division = Path.parse("Division");
 	Path _shed = Path.parse("Shed");

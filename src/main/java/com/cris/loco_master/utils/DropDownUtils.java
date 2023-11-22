@@ -54,8 +54,15 @@ public class DropDownUtils {
 			Adaptation userPermissionsZoneRecord = (Adaptation) zoneResult.get(0);
 			String zoneCode = (String) userPermissionsZoneRecord.get(Path.parse("./Zone_Code"));
 
+			System.out.println("===Zone Code===" + zoneCode);
+
 			Adaptation zoneRecord = Constants.TABLE_ZONE_REFERENCE
 					.lookupAdaptationByPrimaryKey(PrimaryKey.parseString(zoneCode));
+
+//			if (zoneRecord == null) {
+//				System.out.println("===Zone record is null===");
+//				continue;
+//			}
 			String zoneName = zoneRecord.getString(Path.parse("./Zone_Name"));
 			zoneName = zoneName != null ? zoneName : "";
 
@@ -162,11 +169,11 @@ public class DropDownUtils {
 
 				String shedCode = shedRecord.getString(Path.parse("./Shed_Code"));
 				String shedName = shedRecord.getString(Path.parse("./Shed_Name"));
-				String shedSourceSystemName = shedRecord.getString(Path.parse("./Source_System_Name"));
+//				String shedSourceSystemName = shedRecord.getString(Path.parse("./Source_System_Name"));
 
-				if (shedSourceSystemName != null)
-					if (shedSourceSystemName.equalsIgnoreCase("SLAM"))
-						continue;
+//				if (shedSourceSystemName != null)
+//					if (shedSourceSystemName.equalsIgnoreCase("SLAM"))
+//						continue;
 
 				shedName = shedName != null ? shedName : "";
 

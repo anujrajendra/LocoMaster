@@ -38,7 +38,7 @@ public class LocoUpdateServiceDeclaration implements UserServiceDeclaration.OnTa
 	@Override
 	public void defineProperties(UserServicePropertiesDefinitionContext aContext) {
 		// TODO Auto-generated method stub
-		aContext.setLabel("Update Loco Record");
+		aContext.setLabel("Update Loco");
 		aContext.setDescription("Update Loco Record");
 	}
 

@@ -7,7 +7,7 @@ import com.orchestranetworks.userservice.UserServiceSetupDisplayContext;
 
 public interface DisplayStep {
 	enum EventOutcome implements UserServiceEventOutcome {
-		DISPLAY_RESULT
+		DISPLAY_RESULT, DISPLAY_INPUT_SCREEN, DISPLAY_CONFIRMATION, DISPLAY_EXIT_MESSAGE
 	}
 
 	void setupDisplay(final UserServiceSetupDisplayContext<TableViewEntitySelection> context,

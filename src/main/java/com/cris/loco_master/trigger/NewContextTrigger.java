@@ -14,13 +14,15 @@ import com.orchestranetworks.query.Query;
 import com.orchestranetworks.query.QueryResult;
 import com.orchestranetworks.query.Tuple;
 import com.orchestranetworks.schema.Path;
+import com.orchestranetworks.schema.trigger.BeforeModifyOccurrenceContext;
 import com.orchestranetworks.schema.trigger.NewTransientOccurrenceContext;
 import com.orchestranetworks.schema.trigger.TableTrigger;
 import com.orchestranetworks.schema.trigger.TriggerSetupContext;
+import com.orchestranetworks.service.OperationException;
 import com.orchestranetworks.service.Role;
+import com.orchestranetworks.service.Session;
 import com.orchestranetworks.service.UserReference;
 import com.orchestranetworks.service.ValueContextForUpdate;
-import com.orchestranetworks.service.directory.DirectoryHandler;
 
 public class NewContextTrigger extends TableTrigger {
 
@@ -31,14 +33,14 @@ public class NewContextTrigger extends TableTrigger {
 
 		// Applied on Locomotive table
 
-		// String name = aContext.getSession().getUserReference().getUserId();
+		String name = aContext.getSession().getUserReference().getUserId();
 		String userId = aContext.getSession().getUserReference().getUserId();
 		// System.out.println("==Inside Trigger User ID==" + userId);
 
 		ValueContextForUpdate valueContextForUpdate = aContext.getOccurrenceContextForUpdate();
 		valueContextForUpdate.setValue(userId, Paths._Root_Locomotive._Root_Locomotive_Audit_Info_Logged_In_User);
 
-		valueContextForUpdate.setValue(userId, Paths._Root_Locomotive._Root_Locomotive_Audit_Info_Created_By_User);
+		valueContextForUpdate.setValue(name, Paths._Root_Locomotive._Root_Locomotive_Audit_Info_Created_By_User);
 
 		valueContextForUpdate.setValueEnablingPrivilegeForNode(new Date(),
 				Paths._Root_Locomotive._Root_Locomotive_Loco_Entry_Date);
@@ -46,12 +48,9 @@ public class NewContextTrigger extends TableTrigger {
 		Repository repository = Repository.getDefault();
 
 		UserReference userReference = UserReference.forUser(userId);
-		Boolean userRoleFlag = DirectoryHandler.getInstance(repository).isUserInRole(userReference,
-				Role.forSpecificRole("RB_DS"));
-		if (!userRoleFlag) {
-			userRoleFlag = DirectoryHandler.getInstance(repository).isUserInRole(userReference,
-					Role.forSpecificRole("RB_DAA"));
-		}
+
+		Boolean userRoleFlag = aContext.getSession().isUserInRole(Role.forSpecificRole("RB_DS"))
+				|| aContext.getSession().isUserInRole(Role.forSpecificRole("RB_DAA"));
 
 		final HomeKey userDataSpaceKey = HomeKey.forBranchName("user_data");
 		final AdaptationHome userDataspaceName = repository.lookupHome(userDataSpaceKey);
@@ -81,7 +80,41 @@ public class NewContextTrigger extends TableTrigger {
 			e.printStackTrace();
 		}
 
-		if (userRegistrationDetailsRecord != null && (!userRoleFlag)) {
+		if (userRoleFlag) {
+
+			String shedQuery = "Select s.\"$adaptation\" from \"/root/Shed\" s ";
+			Query<Tuple> shedQueryTuple = referenceDatasetName.createQuery(shedQuery);
+			QueryResult<Tuple> shedRecords = shedQueryTuple.getResult();
+
+			Adaptation shedRecord = null;
+
+			String zoneCode = "";
+			String divisionCode = "";
+			String shedCode = "";
+
+			String shedSourceSystemName = "";
+
+			for (Tuple shedResult : shedRecords) {
+				shedRecord = (Adaptation) shedResult.get(0);
+				if (shedRecord != null) {
+					shedSourceSystemName = shedRecord.getString(Path.parse("./Source_System_Name"));
+					if (shedSourceSystemName != null)
+						if (shedSourceSystemName.equalsIgnoreCase("SLAM"))
+							continue;
+					zoneCode = shedRecord.getString(Path.parse("./Zone_Code"));
+					divisionCode = shedRecord.getString(Path.parse("./Division_Code"));
+					shedCode = shedRecord.getString(Path.parse("./Shed_Code"));
+
+				} else {
+					continue;
+				}
+				valueContextForUpdate.setValue(zoneCode, Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Zone);
+				valueContextForUpdate.setValue(divisionCode,
+						Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Division);
+				valueContextForUpdate.setValue(shedCode, Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Shed);
+				break;
+			}
+		} else if (userRegistrationDetailsRecord != null && (!userRoleFlag)) {
 			Adaptation userPermissionsZoneRecord = null;
 
 			String userPermissionsZoneQuery = "Select s.\"$adaptation\" from \"/root/User_Permissions_Zone\" s where FK_AS_STRING('user_data','/root/User_Permissions_Zone', s.User_Id) = '"
@@ -104,6 +137,7 @@ public class NewContextTrigger extends TableTrigger {
 					userPermissionsZoneRecord = (Adaptation) zoneResult.get(0);
 					String zoneCode = (String) userPermissionsZoneRecord.get(Path.parse("./Zone_Code"));
 					valueContextForUpdate.setValue(zoneCode, Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Zone);
+
 					break;
 				}
 
@@ -162,40 +196,6 @@ public class NewContextTrigger extends TableTrigger {
 				}
 
 			}
-		} else {
-
-			String shedQuery = "Select s.\"$adaptation\" from \"/root/Shed\" s ";
-			Query<Tuple> shedQueryTuple = referenceDatasetName.createQuery(shedQuery);
-			QueryResult<Tuple> shedRecords = shedQueryTuple.getResult();
-
-			Adaptation shedRecord = null;
-
-			String zoneCode = "";
-			String divisionCode = "";
-			String shedCode = "";
-
-			String shedSourceSystemName = "";
-
-			for (Tuple shedResult : shedRecords) {
-				shedRecord = (Adaptation) shedResult.get(0);
-				if (shedRecord != null) {
-					shedSourceSystemName = shedRecord.getString(Path.parse("./Source_System_Name"));
-					if (shedSourceSystemName != null)
-						if (shedSourceSystemName.equalsIgnoreCase("SLAM"))
-							continue;
-					zoneCode = shedRecord.getString(Path.parse("./Zone_Code"));
-					divisionCode = shedRecord.getString(Path.parse("./Division_Code"));
-					shedCode = shedRecord.getString(Path.parse("./Shed_Code"));
-
-				} else {
-					continue;
-				}
-				valueContextForUpdate.setValue(zoneCode, Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Zone);
-				valueContextForUpdate.setValue(divisionCode,
-						Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Division);
-				valueContextForUpdate.setValue(shedCode, Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Shed);
-				break;
-			}
 		}
 	}
 
@@ -205,4 +205,26 @@ public class NewContextTrigger extends TableTrigger {
 
 	}
 
+	@Override
+	public void handleBeforeModify(BeforeModifyOccurrenceContext aContext) throws OperationException {
+		// TODO Auto-generated method stub
+		super.handleBeforeModify(aContext);
+
+		Session session = aContext.getSession();
+
+		if (session.isInWorkflowInteraction(true)) {
+
+			if (session.getTrackingInfo() != null) {
+
+				if (session.getTrackingInfo().equalsIgnoreCase("Loco_Create_API")) {
+
+					ValueContextForUpdate valueContextForUpdate = aContext.getOccurrenceContextForUpdate();
+					valueContextForUpdate.setValueEnablingPrivilegeForNode("SLUP",
+							Paths._Root_Locomotive._Root_Locomotive_Audit_Info_Source_Event_Type);
+				}
+
+			}
+
+		}
+	}
 }

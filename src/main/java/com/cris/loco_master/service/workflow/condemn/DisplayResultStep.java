@@ -51,8 +51,8 @@ public class DisplayResultStep implements DisplayStep {
 //					.createInfo("The request for transfer of locomotives has been submitted successfully.");
 //			writer.addUILabel(new UIFormLabelSpec(message));
 //		}
-		final UserMessage message = UserMessage
-				.createInfo("The request for loco condemnation " + displayMessage + "has been submitted successfully.");
+		final UserMessage message = UserMessage.createInfo(
+				"The request for loco condemnation " + displayMessage + " has been submitted successfully.");
 		writer.addUILabel(new UIFormLabelSpec(message));
 		writer.add("</div>");
 	}

@@ -102,10 +102,11 @@ public class LocomotiveUserBasedDivisionsPane implements UIFormPane {
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Commissioning_Date);
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Service_Type);
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Condemn_Proposal_Type);
-
+		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Condemnation_Reason);
+		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Condemn_Date);
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Receiving_Date);
-		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Condemn_Date);
+		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Transfer_Date);
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_POH_Date);
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Rtis_Flag);
 		pWriter.addFormRow(Paths._Root_Locomotive._Root_Locomotive_Loco_Hog_Flag);

@@ -65,18 +65,21 @@ public class LocoUpdateService implements UserService<TableViewEntitySelection> 
 			Request selectedRecord = aContext.getEntitySelection().getSelectedRecords();
 			RequestResult result = selectedRecord.execute();
 
+			Adaptation record = null;
+			String locoNumber;
 			if (result.isSizeGreaterOrEqual(1)) {
 
-				Adaptation productRecord = result.nextAdaptation();
+				record = result.nextAdaptation();
 
-				String xPathExpression = productRecord.toXPathExpression();
+				String xPathExpression = record.toXPathExpression();
+				locoNumber = (String) record.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Number);
 				// LoggingCategory.getWorkflow().info("XPath Expression: " + xPathExpression);
 				launcher.setInputParameter("record", xPathExpression);
 			} else
 				return UserServiceNext.nextClose();
 
-			launcher.setLabel(UserMessage.createInfo("Loco Record Modification"));
-			launcher.setDescription(UserMessage.createInfo("Loco Record Modification"));
+			launcher.setLabel(UserMessage.createInfo("Loco - " + locoNumber + " Update Request"));
+			launcher.setDescription(UserMessage.createInfo("Loco - " + locoNumber + " Update Request"));
 			ProcessLauncherResult launcherResult = launcher.launchProcessWithResult();
 			if (launcherResult != null) {
 				wiKey = launcherResult.getWorkItemKey();

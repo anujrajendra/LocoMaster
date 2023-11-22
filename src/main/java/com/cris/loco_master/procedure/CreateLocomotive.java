@@ -68,8 +68,8 @@ public class CreateLocomotive implements Procedure {
 		try {
 
 			if (recordAction.equalsIgnoreCase("add")) {
-				Adaptation stationRecord = pContext.doCreateOccurrence(vcfuLocomotive, tbLocomotive);
-				mdmId = (String) stationRecord.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Number);
+				Adaptation locoRecord = pContext.doCreateOccurrence(vcfuLocomotive, tbLocomotive);
+				mdmId = (String) locoRecord.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Number);
 			} else {
 
 				Repository repository = Repository.getDefault();
@@ -87,7 +87,7 @@ public class CreateLocomotive implements Procedure {
 //					throw OperationException
 //							.createError(" The selected record has already an operation (Loco Update) in process.");
 //				}
-
+//
 //				if (LocoRecordOperationRestrictionUtils.checkRunningProcesses(wfEngine, "loco_condemn_ui", "record",
 //						locomotiveAdaptation.toXPathExpression())) {
 //					throw OperationException
@@ -102,8 +102,8 @@ public class CreateLocomotive implements Procedure {
 //
 //				}
 
-				Adaptation stationRecord = pContext.doModifyContent(locomotiveAdaptation, vcfuLocomotive);
-				mdmId = (String) stationRecord.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Number);
+				Adaptation locoRecord = pContext.doModifyContent(locomotiveAdaptation, vcfuLocomotive);
+				mdmId = (String) locoRecord.get(Paths._Root_Locomotive._Root_Locomotive_Loco_Number);
 			}
 		} catch (ConstraintViolationException | OperationException e) {
 			errorResponse.setErrorCode("500");

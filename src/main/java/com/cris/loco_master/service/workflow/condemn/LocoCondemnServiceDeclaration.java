@@ -38,7 +38,7 @@ public class LocoCondemnServiceDeclaration implements UserServiceDeclaration.OnT
 	@Override
 	public void defineProperties(UserServicePropertiesDefinitionContext aContext) {
 		// TODO Auto-generated method stub
-		aContext.setLabel("Condemn Loco Records");
+		aContext.setLabel("Condemn Loco");
 		aContext.setDescription("Condemn Loco Records");
 	}
 

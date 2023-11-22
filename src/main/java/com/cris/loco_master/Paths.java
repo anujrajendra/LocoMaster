@@ -18,8 +18,8 @@ public interface Paths
 	// ===============================================
 	// Constants for nodes under '/root'.
 	// Statistics:
-	//		154 path constants.
-	//		108 leaf nodes.
+	//		156 path constants.
+	//		110 leaf nodes.
 	public static final Path _Root = Path.parse("/root");
 
 	// Table type path
@@ -60,6 +60,7 @@ public interface Paths
 		public static final Path _Root_Locomotive_Loco_Hauling_Power = Path.parse("./Loco_Hauling_Power");
 		public static final Path _Root_Locomotive_Loco_Traction_Code = Path.parse("./Loco_Traction_Code");
 		public static final Path _Root_Locomotive_Loco_Condemn_Proposal_Type = Path.parse("./Loco_Condemn_Proposal_Type");
+		public static final Path _Root_Locomotive_Loco_Condemnation_Reason = Path.parse("./Loco_Condemnation_Reason");
 		public static final Path _Root_Locomotive_Loco_Condemn_Date = Path.parse("./Loco_Condemn_Date");
 		public static final Path _Root_Locomotive_Loco_POH_Date = Path.parse("./Loco_POH_Date");
 		public static final Path _Root_Locomotive_Loco_HRP_Flag = Path.parse("./Loco_HRP_Flag");
@@ -70,6 +71,7 @@ public interface Paths
 		public static final Path _Root_Locomotive_Loco_VCD_Flag = Path.parse("./Loco_VCD_Flag");
 		public static final Path _Root_Locomotive_Loco_Pvt_Owner_Flag = Path.parse("./Loco_Pvt_Owner_Flag");
 		public static final Path _Root_Locomotive_Loco_Pvt_Party_Code = Path.parse("./Loco_Pvt_Party_Code");
+		public static final Path _Root_Locomotive_Loco_Transfer_Date = Path.parse("./Loco_Transfer_Date");
 		public static final Path _Root_Locomotive_Allotment_Letter = Path.parse("./Allotment_Letter");
 		public static final Path _Root_Locomotive_Allotment_Letter_Allotment_Letter_Number = Path.parse("./Allotment_Letter/Allotment_Letter_Number");
 		public static final Path _Root_Locomotive_Allotment_Letter_Allotment_Letter_Date = Path.parse("./Allotment_Letter/Allotment_Letter_Date");
@@ -96,7 +98,6 @@ public interface Paths
 		{
 			return _Root_Loco_Type;
 		}
-		public static final Path _Root_Loco_Type_MDM_Loco_Type_ID = Path.parse("./MDM_Loco_Type_ID");
 		public static final Path _Root_Loco_Type_Loco_Type = Path.parse("./Loco_Type");
 		public static final Path _Root_Loco_Type_Loco_Traction = Path.parse("./Loco_Traction");
 		public static final Path _Root_Loco_Type_Loco_Description = Path.parse("./Loco_Description");
@@ -105,6 +106,7 @@ public interface Paths
 		public static final Path _Root_Loco_Type_Loco_Axle_Load = Path.parse("./Loco_Axle_Load");
 		public static final Path _Root_Loco_Type_Loco_Axle_Unit = Path.parse("./Loco_Axle_Unit");
 		public static final Path _Root_Loco_Type_Loco_Gauge_Code = Path.parse("./Loco_Gauge_Code");
+		public static final Path _Root_Loco_Type_Loco_Permanent_Domain = Path.parse("./Loco_Permanent_Domain");
 	} 
 
 	// Table type path

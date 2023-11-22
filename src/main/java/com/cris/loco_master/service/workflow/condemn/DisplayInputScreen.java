@@ -60,7 +60,7 @@ public class DisplayInputScreen implements DisplayStep {
 		locoTractionType.setEditorDisabled(true);
 
 		UITextBox locoCommissioningDate = writer.newTextBox(CondemnServicePaths._commissioning_date);
-		locoCommissioningDate.setEditorDisabled(true);
+		locoCommissioningDate.setEditorDisabled(false);
 
 		UITextBox locoType = writer.newTextBox(CondemnServicePaths._loco_type);
 		locoType.setEditorDisabled(true);
@@ -76,7 +76,7 @@ public class DisplayInputScreen implements DisplayStep {
 
 		writer.addFormRow(locoNumber);
 		writer.addFormRow(locoTractionType);
-		writer.addFormRow(locoCommissioningDate);
+		// writer.addFormRow(locoCommissioningDate);
 		writer.addFormRow(locoType);
 		writer.addFormRow(locoZone);
 		writer.addFormRow(locoDivision);
@@ -86,10 +86,17 @@ public class DisplayInputScreen implements DisplayStep {
 		writer.addFormRow(CondemnServicePaths._condemnation_reason);
 		writer.addFormRow(CondemnServicePaths._condemnation_date);
 
+		writer.addFormRow(CondemnServicePaths._commissioning_date);
+
 		writer.addFormRow(CondemnServicePaths._reference_document_number);
 		writer.addFormRow(CondemnServicePaths._reference_document_date);
 		UIWidgetFileUpload widget = writer.newCustomWidget(CondemnServicePaths._reference_document_attachement,
 				fileUploadFactory);
+
+//		widget.setAccept(".pdf");
+//		widget.setAccept(".jpeg");
+//		widget.setAccept(".png");
+
 		writer.addFormRow(widget);
 
 		writer.endTableFormRow();

@@ -94,7 +94,7 @@ public class LocoCondemnService implements UserService<TableViewEntitySelection>
 					+ valueContext.getValue(CondemnServicePaths._condemnation_date) + "<BR> Loco Type - "
 					+ valueContext.getValue(CondemnServicePaths._loco_type) + "<BR> Loco Zone - "
 					+ valueContext.getValue(CondemnServicePaths._zone) + "<BR> Loco Division - "
-					+ valueContext.getValue(CondemnServicePaths._division) + "\n Loco Shed - "
+					+ valueContext.getValue(CondemnServicePaths._division) + "<BR> Loco Shed - "
 					+ valueContext.getValue(CondemnServicePaths._shed) + "<BR> Condemnation reason - "
 					+ valueContext.getValue(CondemnServicePaths._condemnation_reason)
 					+ "<BR> Condemnation proposal type - "
@@ -135,6 +135,7 @@ public class LocoCondemnService implements UserService<TableViewEntitySelection>
 		final Date condemnationDate = (Date) valueContext.getValue(CondemnServicePaths._condemnation_date);
 		final String condemnProposalType = (String) valueContext
 				.getValue(CondemnServicePaths._condemnation_proposal_type);
+		final String condemnationReason = (String) valueContext.getValue(CondemnServicePaths._condemnation_reason);
 
 		final String docNumber = (String) valueContext.getValue(CondemnServicePaths._reference_document_number);
 		final Date docDate = (Date) valueContext.getValue(CondemnServicePaths._reference_document_date);
@@ -205,15 +206,15 @@ public class LocoCondemnService implements UserService<TableViewEntitySelection>
 
 					ValueContextForUpdate vcfuContextForUpdate = procedureContext
 							.getContext(locoRecord1.getAdaptationName());
-					vcfuContextForUpdate.setValueEnablingPrivilegeForNode("RS - Request sent for condemnation",
+					vcfuContextForUpdate.setValueEnablingPrivilegeForNode("RS - Request sent for Condemnation",
 							Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
 
 					procedureContext.doModifyContent(locoRecord1, vcfuContextForUpdate);
 				}
 			};
 
-			ProgrammaticService svc1 = ProgrammaticService.createForSession(context.getSession(), dataspace);
-			svc1.execute(procedure1);
+//			ProgrammaticService svc1 = ProgrammaticService.createForSession(context.getSession(), dataspace);
+//			svc1.execute(procedure1);
 
 			final Procedure procedure = new Procedure() {
 
@@ -239,8 +240,11 @@ public class LocoCondemnService implements UserService<TableViewEntitySelection>
 							Paths._Root_Locomotive._Root_Locomotive_Loco_Condemn_Date);
 					vcfuRecord.setValueEnablingPrivilegeForNode(condemnProposalType,
 							Paths._Root_Locomotive._Root_Locomotive_Loco_Condemn_Proposal_Type);
-					vcfuRecord.setValueEnablingPrivilegeForNode("RS - Request sent for condemnation",
-							Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
+					vcfuRecord.setValueEnablingPrivilegeForNode(condemnationReason,
+							Paths._Root_Locomotive._Root_Locomotive_Loco_Condemnation_Reason);
+
+//					vcfuRecord.setValueEnablingPrivilegeForNode("RS - Request sent for condemnation",
+//							Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
 
 					procedureContext.doModifyContent(locoRecord, vcfuRecord);
 				}
@@ -251,9 +255,13 @@ public class LocoCondemnService implements UserService<TableViewEntitySelection>
 
 			launcher.setInputParameter("childDataSpace", dataspaceCreation.getDataspaceName());
 			launcher.setInputParameter("record", xPathExpression);
-			launcher.setLabel(UserMessage.createInfo("Loco Condemn"));
-			launcher.setDescription(UserMessage.createInfo("Loco Condemn"));
+			launcher.setLabel(UserMessage.createInfo("Loco - " + locoNumber + " Condemn Request"));
+			launcher.setDescription(UserMessage.createInfo("Loco - " + locoNumber + " Condemn Request"));
+
 			launcher.launchProcess();
+
+//			SessionInteraction sessionInteraction = session.getInteraction(true);
+//			sessionInteraction.setComment((String) valueContext.getValue(CondemnServicePaths._condemnation_reason));
 
 		}
 
@@ -322,10 +330,10 @@ public class LocoCondemnService implements UserService<TableViewEntitySelection>
 						"Please use SLAM application to condemn Locomotive records for the selected shed");
 				return;
 			}
-		if (commissioningDate == null) {
-			this.currentStep = new DisplayExitMessageScreen("As Loco Commissioning Date is Empty.");
-			return;
-		}
+//		if (commissioningDate == null) {
+//			this.currentStep = new DisplayExitMessageScreen("As Loco Commissioning Date is Empty.");
+//			return;
+//		}
 		if (locoType == null) {
 			this.currentStep = new DisplayExitMessageScreen("As Loco Type is Empty.");
 			return;
@@ -362,6 +370,7 @@ public class LocoCondemnService implements UserService<TableViewEntitySelection>
 				.createElement(CondemnServicePaths._commissioning_date, SchemaTypeName.XS_DATE);
 		commissioningDateElement.setLabel("Commissioning Date");
 		commissioningDateElement.setDefaultValue(commissioningDate);
+		commissioningDateElement.addFacetConstraint(FutureDateRestrictionConstraint.class);
 
 		final BeanElement locoTypeDateElement = beanDefinition.createElement(CondemnServicePaths._loco_type,
 				SchemaTypeName.XS_STRING);
@@ -397,17 +406,17 @@ public class LocoCondemnService implements UserService<TableViewEntitySelection>
 		final BeanElement docNumberBeanElement = beanDefinition
 				.createElement(CondemnServicePaths._reference_document_number, SchemaTypeName.XS_STRING);
 		docNumberBeanElement.setMinOccurs(1);
-		docNumberBeanElement.setLabel("Doc Number");
+		docNumberBeanElement.setLabel("Letter Number");
 
 		final BeanElement docDateBeanElement = beanDefinition
 				.createElement(CondemnServicePaths._reference_document_date, SchemaTypeName.XS_DATE);
 		docDateBeanElement.setMinOccurs(1);
-		docDateBeanElement.setLabel("Doc Date");
+		docDateBeanElement.setLabel("Letter Date");
 
 		final BeanElement docAttachementBeanElement = beanDefinition
 				.createElement(CondemnServicePaths._reference_document_attachement, BeanDefinition.OSD_FILE_UPLOAD);
 		docAttachementBeanElement.setMinOccurs(1);
-		docAttachementBeanElement.setLabel("Doc Upload");
+		docAttachementBeanElement.setLabel("Letter Upload");
 
 		builder.registerBean(CondemnServicePaths._objectKey, beanDefinition);
 	}

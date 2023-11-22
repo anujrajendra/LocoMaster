@@ -10,13 +10,12 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/ebx.jar"/>
 	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/ebx-addons.jar"/>
-	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/jms-2.0.jar"/>
 	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/tibjms.jar"/>
 	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/tomcat-api.jar"/>
-	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/ecj-4.20.jar"/>
 	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/apache-logging-log4j.jar"/>
 	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/base64-2.3.7.jar"/>
 	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/CommonUtilities.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/ecj-4.20.jar"/>
+	<classpathentry kind="lib" path="D:/EBX/ebxServer/lib/jms-2.0.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

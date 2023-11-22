@@ -45,8 +45,8 @@ public class LocoExtensions implements SchemaExtensions {
 		final Path locoShedPath = Paths._Root_Locomotive.getPathInSchema()
 				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Owning_Shed);
 
-		final Path locoCondemnDatePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Condemn_Date);
+//		final Path locoCondemnDatePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Condemn_Date);
 		final Path locoCondemnProposalTypePath = Paths._Root_Locomotive.getPathInSchema()
 				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Condemn_Proposal_Type);
 
@@ -61,82 +61,82 @@ public class LocoExtensions implements SchemaExtensions {
 		context.setAccessRuleOnNode(locoDivisionPath, locomotiveUpdateAccessRule);
 		context.setAccessRuleOnNode(locoShedPath, locomotiveUpdateAccessRule);
 
-		final Path locoTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Type);
-		final Path locoTractionCodePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Traction_Code);
-		final Path locoPermanentDomainPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Permanent_Domain);
-		final Path locoManufacturerPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Manufacturer);
-		final Path locoAllotmentLetterNumberPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Allotment_Letter_Allotment_Letter_Number);
-		final Path locoAllotmentLetterDatePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Allotment_Letter_Allotment_Letter_Date);
-		final Path locoAllotmentLetterPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Allotment_Letter_Allotment_Letter);
-
-		final Path locoManufacturingDatePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Manufacturing_Date);
-		final Path locoLeasePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Lease_Type);
-		final Path locoGaugeTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Gauge_Type);
-		final Path locoHaulingPowerPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Hauling_Power);
-		final Path locoCab1ACPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Cab1_AC);
-		final Path locoCab2ACPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Cab2_AC);
-		final Path locoAxleLoadPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Axle_Load);
-		final Path locoHotelLoadPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Hotel_Load);
-		final Path locoBoogieTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Boogie_Type);
-		final Path locoAuxilaryPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Auxilary);
-		final Path locoTractionMotorTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Traction_Motor_Type);
-		final Path locoControlTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Control_Type);
-		final Path locoBrakeTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Brake_Type);
-		final Path locoSubBrakeTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Brake_Sub_Type);
-		final Path locoKavachFlagPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Kavach_Flag);
-		final Path locoCVVRSTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_CVVRS_Type);
-		final Path locoVCDFlagPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_VCD_Flag);
-
-		final Path locoEntryDatePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Entry_Date);
-		final Path locoCommissioningDatePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Commissioning_Date);
-		final Path locoServiceTypePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Service_Type);
+//		final Path locoTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Type);
+//		final Path locoTractionCodePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Traction_Code);
+//		final Path locoPermanentDomainPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Permanent_Domain);
+//		final Path locoManufacturerPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Manufacturer);
+//		final Path locoAllotmentLetterNumberPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Allotment_Letter_Allotment_Letter_Number);
+//		final Path locoAllotmentLetterDatePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Allotment_Letter_Allotment_Letter_Date);
+//		final Path locoAllotmentLetterPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Allotment_Letter_Allotment_Letter);
+//
+//		final Path locoManufacturingDatePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Manufacturing_Date);
+//		final Path locoLeasePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Lease_Type);
+//		final Path locoGaugeTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Gauge_Type);
+//		final Path locoHaulingPowerPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Hauling_Power);
+//		final Path locoCab1ACPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Cab1_AC);
+//		final Path locoCab2ACPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Cab2_AC);
+//		final Path locoAxleLoadPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Axle_Load);
+//		final Path locoHotelLoadPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Hotel_Load);
+//		final Path locoBoogieTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Boogie_Type);
+//		final Path locoAuxilaryPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Auxilary);
+//		final Path locoTractionMotorTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Traction_Motor_Type);
+//		final Path locoControlTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Control_Type);
+//		final Path locoBrakeTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Brake_Type);
+//		final Path locoSubBrakeTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Brake_Sub_Type);
+//		final Path locoKavachFlagPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Kavach_Flag);
+//		final Path locoCVVRSTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_CVVRS_Type);
+//		final Path locoVCDFlagPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_VCD_Flag);
+//
+//		final Path locoEntryDatePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Entry_Date);
+//		final Path locoCommissioningDatePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Commissioning_Date);
+//		final Path locoServiceTypePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Service_Type);
 		final Path locoStatusPath = Paths._Root_Locomotive.getPathInSchema()
 				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Status);
-		final Path locoReceivingDatePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Receiving_Date);
+//		final Path locoReceivingDatePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Receiving_Date);
 		final Path locoPOHDatePath = Paths._Root_Locomotive.getPathInSchema()
 				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_POH_Date);
-		final Path locoRtisFlagPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Rtis_Flag);
-		final Path locoHogFlagPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Hog_Flag);
-		final Path locoPowerPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Power_Type);
-		final Path locoRemmoltFlagPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Remmlot_Flag);
-		final Path locoHRPFlagPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_HRP_Flag);
-		final Path locoPvtOwnerPath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Pvt_Owner_Flag);
-		final Path locoPvtPartyCodePath = Paths._Root_Locomotive.getPathInSchema()
-				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Pvt_Party_Code);
+//		final Path locoRtisFlagPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Rtis_Flag);
+//		final Path locoHogFlagPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Hog_Flag);
+//		final Path locoPowerPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Power_Type);
+//		final Path locoRemmoltFlagPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Remmlot_Flag);
+//		final Path locoHRPFlagPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_HRP_Flag);
+//		final Path locoPvtOwnerPath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Pvt_Owner_Flag);
+//		final Path locoPvtPartyCodePath = Paths._Root_Locomotive.getPathInSchema()
+//				.add(Paths._Root_Locomotive._Root_Locomotive_Loco_Pvt_Party_Code);
 
 //		context.setAccessRuleOnNode(locoCondemnDatePath, locomotiveCondemnAccessRule);
 //		context.setAccessRuleOnNode(locoCondemnProposalTypePath, locomotiveCondemnAccessRule);
@@ -186,7 +186,6 @@ public class LocoExtensions implements SchemaExtensions {
 
 		final AccessRule locomotiveHiddenAccessRule = new LocoAttributeHiddenAccessRule();
 		context.setAccessRuleOnNodeAndAllDescendants(locoCondemnProposalTypePath, true, locomotiveHiddenAccessRule);
-
+		context.setAccessRuleOnNodeAndAllDescendants(locoPOHDatePath, true, locomotiveHiddenAccessRule);
 	}
-
 }

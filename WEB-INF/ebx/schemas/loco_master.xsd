@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!--XML schema generated from EBX(R) DMA instance [reference=loco_master] on Fri Nov 03 08:41:42 IST 2023 by user [admin].-->
+<!--XML schema generated from EBX(R) DMA instance [reference=loco_master] on Fri Nov 17 11:37:41 IST 2023 by user [admin].-->
 <xs:schema xmlns:osd="urn:ebx-schemas:common_1.0" xmlns:fmt="urn:ebx-schemas:format_1.0" xmlns:ebxbnd="urn:ebx-schemas:binding_1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ebxs="urn:ebx-schemas:session_1.0">
     <xs:import namespace="urn:ebx-schemas:common_1.0" schemaLocation="https://schema.orchestranetworks.com/common_1.0.xsd"/>
     <xs:import namespace="urn:ebx-schemas:session_1.0" schemaLocation="https://schema.orchestranetworks.com/session_1.0.xsd"/>
@@ -8,7 +8,7 @@
         <xs:appinfo>
             <osd:extensions class="com.cris.loco_master.extensions.LocoExtensions"/>
             <osd:validation>
-                <validationMessageThreshold>1000</validationMessageThreshold>
+                <validationMessageThreshold>500</validationMessageThreshold>
             </osd:validation>
             <osd:inheritance>
                 <dataSetInheritance>none</dataSetInheritance>
@@ -66,7 +66,7 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
-                            <xs:element name="Loco_Type" minOccurs="0" maxOccurs="1">
+                            <xs:element name="Loco_Type" minOccurs="1" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en-US">
                                         <osd:label>Loco Type</osd:label>
@@ -74,9 +74,12 @@
                                     </xs:documentation>
                                     <xs:appinfo>
                                         <osd:otherFacets>
-                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
-                                                <refCode>Loco_Type</refCode>
-                                            </osd:constraintEnumeration>
+                                            <osd:tableRef>
+                                                <tablePath>/root/Loco_Type</tablePath>
+                                                <display>
+                                                    <pattern>${./Loco_Type}</pattern>
+                                                </display>
+                                            </osd:tableRef>
                                         </osd:otherFacets>
                                     </xs:appinfo>
                                 </xs:annotation>
@@ -96,6 +99,9 @@
                                     <xs:appinfo>
                                         <osd:otherFacets>
                                             <osd:constraint class="com.cris.commonjars.constraint.FutureDateRestrictionConstraint"/>
+                                            <osd:constraint class="com.cris.loco_master.constraint.MandatoryFieldsConstraint">
+                                                <attributeName>Loco Commissioning Date</attributeName>
+                                            </osd:constraint>
                                         </osd:otherFacets>
                                     </xs:appinfo>
                                 </xs:annotation>
@@ -140,7 +146,7 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
-                            <xs:element name="Loco_Permanent_Domain" minOccurs="0" maxOccurs="1">
+                            <xs:element name="Loco_Permanent_Domain" minOccurs="1" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en-US">
                                         <osd:label>Loco Permanent Domain</osd:label>
@@ -149,10 +155,15 @@
                                     </xs:documentation>
                                     <xs:appinfo>
                                         <osd:otherFacets>
-                                            <osd:constraintEnumeration class="com.cris.reference_master.commonjars.GetReferenceValuesFilter">
-                                                <refCode>Loco_Permanent_Domain</refCode>
-                                            </osd:constraintEnumeration>
+                                            <osd:constraint class="com.cris.loco_master.constraint.LocoTypeInheritedFieldsConstraint">
+                                                <attributeName>Loco_Permanent_Domain</attributeName>
+                                            </osd:constraint>
                                         </osd:otherFacets>
+                                        <osd:inheritance>
+                                            <sourceRecord>/root/Locomotive/Loco_Type</sourceRecord>
+                                            <sourceNode>./Loco_Permanent_Domain</sourceNode>
+                                        </osd:inheritance>
+                                        <osd:replication disable="true"/>
                                     </xs:appinfo>
                                 </xs:annotation>
                                 <xs:simpleType>
@@ -203,7 +214,7 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
-                            <xs:element name="Loco_Owning_Zone" minOccurs="0">
+                            <xs:element name="Loco_Owning_Zone" minOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en-US">
                                         <osd:label>Loco Owning Zone</osd:label>
@@ -223,7 +234,7 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
-                            <xs:element name="Loco_Owning_Division" minOccurs="0" maxOccurs="1">
+                            <xs:element name="Loco_Owning_Division" minOccurs="1" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en-US">
                                         <osd:label>Loco Owning Division</osd:label>
@@ -242,7 +253,7 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
-                            <xs:element name="Loco_Owning_Shed" minOccurs="0" maxOccurs="1">
+                            <xs:element name="Loco_Owning_Shed" minOccurs="1" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en-US">
                                         <osd:label>Loco Owning Shed</osd:label>
@@ -376,6 +387,9 @@
                                     <xs:appinfo>
                                         <osd:otherFacets>
                                             <osd:constraint class="com.cris.commonjars.constraint.FutureDateRestrictionConstraint"/>
+                                            <osd:constraint class="com.cris.loco_master.constraint.MandatoryFieldsConstraint">
+                                                <attributeName>Loco Manufacturing Date</attributeName>
+                                            </osd:constraint>
                                         </osd:otherFacets>
                                     </xs:appinfo>
                                 </xs:annotation>
@@ -390,6 +404,9 @@
                                     <xs:appinfo>
                                         <osd:otherFacets>
                                             <osd:constraint class="com.cris.commonjars.constraint.FutureDateRestrictionConstraint"/>
+                                            <osd:constraint class="com.cris.loco_master.constraint.MandatoryFieldsConstraint">
+                                                <attributeName>Loco Receiving Date</attributeName>
+                                            </osd:constraint>
                                         </osd:otherFacets>
                                     </xs:appinfo>
                                 </xs:annotation>
@@ -558,17 +575,16 @@
                                     </xs:documentation>
                                     <xs:appinfo>
                                         <osd:otherFacets>
-                                            <osd:tableRef>
-                                                <tablePath>/root/Loco_Type</tablePath>
-                                                <display>
-                                                    <pattern>${./Loco_Axle_Load}</pattern>
-                                                </display>
-                                                <filter>
-                                                    <predicate>./Loco_Type = ${../Loco_Type}</predicate>
-                                                </filter>
-                                            </osd:tableRef>
+                                            <osd:constraint class="com.cris.loco_master.constraint.LocoTypeInheritedFieldsConstraint">
+                                                <attributeName>Loco_Axle_Load</attributeName>
+                                            </osd:constraint>
                                         </osd:otherFacets>
+                                        <osd:inheritance>
+                                            <sourceRecord>/root/Locomotive/Loco_Type</sourceRecord>
+                                            <sourceNode>./Loco_Axle_Load</sourceNode>
+                                        </osd:inheritance>
                                         <osd:information>Axle Load value Should not be  less then as per the formula (Axle Load=Total Weight of Loco/Number of Axle)</osd:information>
+                                        <osd:replication disable="true"/>
                                     </xs:appinfo>
                                 </xs:annotation>
                                 <xs:simpleType>
@@ -591,7 +607,7 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
-                            <xs:element name="Loco_Traction_Code" minOccurs="0" maxOccurs="1">
+                            <xs:element name="Loco_Traction_Code" minOccurs="1" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en-US">
                                         <osd:label>Loco Traction Code</osd:label>
@@ -630,6 +646,18 @@
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
                                         <xs:maxLength value="15"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Condemnation_Reason" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Condemnation Reason</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="50"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
@@ -821,6 +849,13 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
+                            <xs:element name="Loco_Transfer_Date" type="xs:date" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Transfer Date</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                             <xs:element name="Allotment_Letter">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en-US">
@@ -982,24 +1017,13 @@
                     <xs:annotation>
                         <xs:appinfo>
                             <osd:table>
-                                <primaryKeys>/MDM_Loco_Type_ID </primaryKeys>
+                                <primaryKeys>/Loco_Type </primaryKeys>
                                 <defaultLabel>${./Loco_Type}</defaultLabel>
                             </osd:table>
                         </xs:appinfo>
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="MDM_Loco_Type_ID" type="xs:int" minOccurs="1" maxOccurs="1">
-                                <xs:annotation>
-                                    <xs:documentation xml:lang="en-US">
-                                        <osd:label>MDM Loco Type ID</osd:label>
-                                        <osd:description>MDM Loco Type ID</osd:description>
-                                    </xs:documentation>
-                                    <xs:appinfo>
-                                        <osd:autoIncrement/>
-                                    </xs:appinfo>
-                                </xs:annotation>
-                            </xs:element>
                             <xs:element name="Loco_Type" minOccurs="0" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation xml:lang="en-US">
@@ -1104,6 +1128,19 @@
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
                                         <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Loco_Permanent_Domain" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Loco Permanent Domain</osd:label>
+                                        <osd:description>Loco Permanent Domain</osd:description>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:maxLength value="30"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>

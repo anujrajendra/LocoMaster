@@ -5,6 +5,7 @@ import com.orchestranetworks.ui.UIButtonSpec;
 import com.orchestranetworks.ui.UIButtonSpecNavigation;
 import com.orchestranetworks.ui.UICSSClasses;
 import com.orchestranetworks.ui.UIFormLabelSpec;
+import com.orchestranetworks.ui.form.widget.UITextBox;
 import com.orchestranetworks.ui.form.widget.UIWidgetFileUpload;
 import com.orchestranetworks.ui.form.widget.UIWidgetFileUploadFactory;
 import com.orchestranetworks.ui.selection.TableViewEntitySelection;
@@ -51,6 +52,32 @@ public class DisplayInputScreen implements DisplayStep {
 		}
 		// adds row to the screen.
 		writer.startTableFormRow();
+
+		UITextBox locoNumber = writer.newTextBox(TransferServicePaths._loco_number);
+		locoNumber.setEditorDisabled(true);
+
+		UITextBox locoType = writer.newTextBox(TransferServicePaths._loco_type);
+		locoType.setEditorDisabled(true);
+
+		UITextBox locoTraction = writer.newTextBox(TransferServicePaths._loco_traction);
+		locoTraction.setEditorDisabled(true);
+
+		UITextBox oldZone = writer.newTextBox(TransferServicePaths._old_zone);
+		oldZone.setEditorDisabled(true);
+
+		UITextBox oldDivision = writer.newTextBox(TransferServicePaths._old_division);
+		oldDivision.setEditorDisabled(true);
+
+		UITextBox oldShed = writer.newTextBox(TransferServicePaths._old_shed);
+		oldShed.setEditorDisabled(true);
+
+		writer.addFormRow(locoNumber);
+		writer.addFormRow(locoType);
+		writer.addFormRow(locoTraction);
+		writer.addFormRow(oldZone);
+		writer.addFormRow(oldDivision);
+		writer.addFormRow(oldShed);
+
 		writer.addFormRow(TransferServicePaths._zone);
 		writer.addFormRow(TransferServicePaths._division);
 		writer.addFormRow(TransferServicePaths._shed);
@@ -65,6 +92,6 @@ public class DisplayInputScreen implements DisplayStep {
 	}
 
 	protected UserServiceEventOutcome onNextPressed(final UserServiceEventContext context) {
-		return EventOutcome.DISPLAY_RESULT; // Eventoutcome to navigate to the confirmation page.
+		return EventOutcome.DISPLAY_CONFIRMATION; // Eventoutcome to navigate to the confirmation page.
 	}
 }

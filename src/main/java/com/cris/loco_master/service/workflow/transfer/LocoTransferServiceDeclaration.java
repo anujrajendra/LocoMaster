@@ -31,12 +31,13 @@ public class LocoTransferServiceDeclaration implements UserServiceDeclaration.On
 	public void defineActivation(ActivationContextOnTableView context) {
 		context.includeSchemaNodesMatching(Paths._Root_Locomotive.getPathInSchema());
 		context.forbidEmptyRecordSelection();
+		context.limitRecordSelection(1);
 
 	}
 
 	@Override
 	public void defineProperties(UserServicePropertiesDefinitionContext context) {
-		context.setLabel("Loco Transfer");
+		context.setLabel("Transfer Loco");
 		context.setDescription("Service to transfer locomotive/s");
 	}
 

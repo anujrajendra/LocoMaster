@@ -54,14 +54,11 @@ public class LocomotiveResource {
 		Repository repository = Repository.getDefault();
 		AdaptationHome dataspace = repository.lookupHome(HomeKey.parse(HomeKey.forBranchName("loco_data").format()));
 
-		DataspaceCreationUtils dataspaceCreation = new DataspaceCreationUtils(dataspace, repository, session);
-		AdaptationHome childDataspace = dataspaceCreation.getDataspace();
+//		DataspaceCreationUtils dataspaceCreation = new DataspaceCreationUtils(dataspace, repository, session);
+//		AdaptationHome childDataspace = dataspaceCreation.getDataspace();
 
-		// AdaptationHome childDataspace = repository.createHome(childDataspaceSpec,
-		// session);
-
-		Adaptation dataset = childDataspace.findAdaptationOrNull(AdaptationName.forName("loco_data"));
-		ProgrammaticService svc = ProgrammaticService.createForSession(session, childDataspace);
+		Adaptation dataset = dataspace.findAdaptationOrNull(AdaptationName.forName("loco_data"));
+		ProgrammaticService svc = ProgrammaticService.createForSession(session, dataspace);
 
 		Locomotive locomotive = WebServiceUtils.validateLocomotiveRequest(jsonElement, message, errorResponse, "add",
 				dataset);
@@ -70,7 +67,6 @@ public class LocomotiveResource {
 			String errorResponseString = (new Gson()).toJson(errorResponse);
 			return Response.status(Response.Status.BAD_REQUEST).entity(errorResponseString).build();
 		}
-		locomotive.getLoco_Number();
 
 		String recordAction;
 		if (WebServiceUtils.isLocoNumberPresent(locomotive.getLoco_Number(), dataset)) {
@@ -92,12 +88,14 @@ public class LocomotiveResource {
 		}
 
 		WorkflowProcessLauncherUtils launcherUtils = new WorkflowProcessLauncherUtils(repository, session,
-				"loco_create_api", "Locomotive Rest API", "Locomotive Rest API-Workflow");
+				"loco_create_api", "Loco - " + locomotive.getLoco_Number() + " from SLAM",
+				"Loco - " + locomotive.getLoco_Number() + " from SLAM");
 		ProcessLauncher processLauncher = launcherUtils.getProcessLauncher();
 
 		String recordPk = "/root/Locomotive[./Loco_Number=\"" + successResponse.getMdmId() + "\"]";
 
-		processLauncher.setInputParameter("childDataSpace", dataspaceCreation.getDataspaceName());
+//		processLauncher.setInputParameter("childDataSpace", dataspaceCreation.getDataspaceName());
+		processLauncher.setInputParameter("childDataSpace", "loco_data");
 		processLauncher.setInputParameter("record", recordPk);
 		// processLauncher.setInputParameter("record", simplifiedXpath);
 

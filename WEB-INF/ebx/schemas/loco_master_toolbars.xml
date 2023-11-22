@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!--XML generated from EBX® DMA instance [reference=loco_master] on Fri Nov 03 08:41:42 IST 2023 by user [admin].-->
+<!--XML generated from EBX® DMA instance [reference=loco_master] on Fri Nov 17 11:37:41 IST 2023 by user [admin].-->
 <root>
     <toolbarNode>
         <id>7</id>
@@ -104,6 +104,9 @@
                 <excludedServices>@creation</excludedServices>
                 <excludedServices>@duplicate</excludedServices>
                 <excludedServices>@WorkflowMassPublish</excludedServices>
+                <excludedServices>CondemnRecords</excludedServices>
+                <excludedServices>Loco_Transfer</excludedServices>
+                <excludedServices>UpdateRecords</excludedServices>
                 <filteringPolicy>SMART_FILTERING</filteringPolicy>
             </menuBuilder>
         </menuGroup>
